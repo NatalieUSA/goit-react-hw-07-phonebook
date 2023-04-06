@@ -4,10 +4,8 @@ import { List } from './PhonebookList.styled';
 import { Btn } from 'components/shared/Button/Button.styled';
 
 import { getFilteredContacts } from 'components/redux/contacts/ContactsSelector';
-import { useSelector } from 'react-redux';
-import { useDispatch } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { Title } from 'components/shared/Title/Title';
-
 import { fetchDeleteContact } from 'components/redux/contacts/ContactsOperations';
 
 export const PhonebookList = () => {
