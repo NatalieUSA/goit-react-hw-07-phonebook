@@ -8,8 +8,8 @@ export const PhonebookFilter = () => {
   const dispatch = useDispatch();
   const filter = useSelector(getFilter);
 
-  const handleFilter = e => {
-    dispatch(setFilter(e.target.value));
+  const handleFilter = ({ target }) => {
+    dispatch(setFilter(target.value));
   };
 
   return (

@@ -4,33 +4,26 @@ import { initialState } from './initialState';
 import { FormGroup, Input, Label } from './PhonebookForm.styled';
 import { FormBtn } from './PhonebookForm.styled';
 
-import { addContact } from 'components/redux/contacts/ContactsSlice';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
-import { getAllContacts } from 'components/redux/contacts/ContactsSelector';
-import { toast } from 'react-toastify';
+import { useEffect } from 'react';
+import {
+  fetchContacts,
+  fetchAddContact,
+} from 'components/redux/contacts/ContactsOperations';
 
 export const PhonebookForm = () => {
   const [state, setState] = useState({ ...initialState });
-  const allContacts = useSelector(getAllContacts);
+
   const dispatch = useDispatch();
 
-  const isDublicate = name => {
-    const normalizedName = name.toLowerCase();
-    const result = allContacts.find(({ name }) => {
-      return name.toLowerCase() === normalizedName;
-    });
-    return Boolean(result);
-  };
+  useEffect(() => {
+    dispatch(fetchContacts());
+  }, [dispatch]);
 
+  
   const handleAddContact = ({ name, number }) => {
-    if (isDublicate(name)) {
-      toast.success(`${name} 🦄 is already in contacts`);
-      return false;
-    }
-
-    const action = addContact({ name, number });
-    dispatch(action);
+    dispatch(fetchAddContact({ name, number }));
   };
 
   const handleChange = ({ target }) => {

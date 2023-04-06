@@ -6,8 +6,9 @@ import { Btn } from 'components/shared/Button/Button.styled';
 import { getFilteredContacts } from 'components/redux/contacts/ContactsSelector';
 import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
-import { deleteContact } from 'components/redux/contacts/ContactsSlice';
 import { Title } from 'components/shared/Title/Title';
+
+import { fetchDeleteContact } from 'components/redux/contacts/ContactsOperations';
 
 export const PhonebookList = () => {
   const filteredContacts = useSelector(getFilteredContacts);
@@ -15,7 +16,7 @@ export const PhonebookList = () => {
   const dispatch = useDispatch();
 
   const removeContact = id => {
-    dispatch(deleteContact(id));
+    dispatch(fetchDeleteContact(id));
   };
 
   const isContacts = Boolean(filteredContacts.length);
